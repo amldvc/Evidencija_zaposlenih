@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<div class="container">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Divine Beauty Logo" class="logo">
+    <form action="{{ url_for('login') }}" method="POST" class="login-form">
+        <h3>PRIJAVA</h3>
+        <label for="email">EMAIL ADRESA</label>
+        <input type="email" id="email" name="email" required>
+       
+        <label for="password">LOZINKA</label>
+        <input type="password" id="password" name="password" required>
+       
+        <button type="submit">PRIJAVI SE</button>
+    </form>
+
+    <script>
+        setTimeout(function() {
+            let alert = document.querySelector("#login-poruka");
+            if (alert) {
+                alert.classList.add("fade-out");
+                setTimeout(() => alert.remove(), 1000);
+            }
+        }, 3000);
+    </script>
+</div>
+<style> /* Postavljanje tela stranice na celu širinu i visinu ekrana */
+    body, html {
+        height: 100%; /* Da bi stranica zauzela celu visinu */
+        margin: 0;    /* Uklanja podrazumevani razmak oko tela */
+        font-family: Arial, sans-serif; /* Postavi željeni font */
+    }
+   
+    /* Centriranje sadržaja login forme */
+    .container {
+        display: flex;
+        justify-content: center; /* Centriraj horizontalno */
+        align-items: center;     /* Centriraj vertikalno */
+        height: 100vh;           /* Postavi visinu na celu visinu ekrana */
+    }
+   
+    /* Stilizovanje forme */
+    .login-form {
+        background-color: white;  /* Boja pozadine forme */
+        padding: 30px;            /* Razmak unutar forme */
+        border-radius: 8px;       /* Zaobljeni uglovi */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Blaga senka oko forme */
+        width: 100%;              /* Zauzima celu širinu do određenog maksimuma */
+        max-width: 400px;         /* Maksimalna širina forme (možeš promeniti po želji) */
+    }
+   
+    /* Stil za inpute i dugmadi */
+    input[type="email"], input[type="password"], button {
+        width: 100%;             /* Širina 100% unutar forme */
+        padding: 12px;           /* Razmak unutar inputa/dugmadi */
+        margin-bottom: 10px;     /* Razmak između polja */
+        border: 1px solid #ccc; /* Ivica inputa */
+        border-radius: 4px;     /* Zaobljeni uglovi */
+        box-sizing: border-box; /* Da ne izlazi van granica */
+    }
+   
+    button {
+        background-color: #D4AF37; /* Zlata boja za dugme */
+        color: white;              /* Boja teksta na dugmetu */
+        font-size: 16px;           /* Veličina fonta na dugmetu */
+        cursor: pointer;          /* Kursor u obliku ruke na dugmetu */
+    }
+   
+    button:hover {
+        background-color: #c68f28; /* Tamnija zlatna boja pri hoveru */
+    }
+   
+    /* Flash poruka (greške) */
+    .flash-message {
+        background-color: #ffffff; /* Svetlo crvena boja pozadine */
+        color: #d8000c;            /* Tamno crvena boja teksta */
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+   
+    .fade-out {
+        animation: fadeOut 1s ease-out forwards;
+    }
+   
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }</style>
+{% endblock %}

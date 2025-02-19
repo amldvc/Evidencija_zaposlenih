@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<nav class="navbar">
+    <div class="nav-container">
+        <ul class="logo">MENADŽER</ul>
+        <ul class="nav-links">
+            <li><a href="/zaposleni">ZAPOSLENI</a></li>
+            <li><a href="/radnik_raspored">RASPORED RADNIKA</a></li>
+            <li><a href="/izmena_rasporeda">IZMENA RASPOREDA</a></li>
+        </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            
+            <!-- Dugme za odjavu skroz desno -->
+            {% if request.endpoint != 'login' %}
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i></a>
+            {% endif %}
+
+
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>DOBRODOŠLI!</h1>
+</div>
+{% endblock %}

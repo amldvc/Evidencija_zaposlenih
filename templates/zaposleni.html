@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">LISTA ZAPOSLENIH</h2>
+
+    <!-- Tabela sa zaposlenima -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ime i prezime</th>
+                <th>Pozicija</th>
+                <th>Datum zaposlenja</th>
+                <th>Email</th>
+                <th>Kontakt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zaposleni in zaposleni_lista %}
+            <tr>
+                <td>{{ zaposleni.ime }} {{ zaposleni.prezime }}</td>
+                <td>{{ zaposleni.pozicija }}</td>
+                <td>{{ zaposleni.datum_zaposlenja }}</td>
+                <td>{{ zaposleni.mejl }}</td> <!-- U bazi se polje zove "mejl" -->
+                <td>{{ zaposleni.kontakt }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">Nema zaposlenih</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Forma za dodavanje zaposlenog (admin i menadžer mogu da vide) -->
+    {% if session.get('role') in ['admin'] %}
+    <form method="POST" action="{{ url_for('dodaj_zaposlenog') }}" class="d-flex gap-2 mt-3">
+        <input type="text" name="imeiprezime" class="form-control" placeholder="Ime i prezime" required>
+        <input type="text" name="pozicija" class="form-control" placeholder="Pozicija" required>
+        <input type="date" name="datumzaposlenja" class="form-control">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+        <input type="text" name="kontakt" class="form-control" placeholder="Kontakt" required>
+        <button type="submit" class="btn btn-warning">Dodaj zaposlenog</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

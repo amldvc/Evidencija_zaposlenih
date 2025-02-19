@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>IZMENA RASPOREDA</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Dan</th>
+                <th>08:00 - 09:30</th>
+                <th>09:30 - 11:00</th>
+                <th>11:00 - 12:30</th>
+                <th>PAUZA</th>
+                <th>13:00 - 14:30</th>
+                <th>14:30 - 16:00</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set dani = ["Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak"] %}
+            {% for dan in dani %}
+            <tr>
+                <td>{{ dan }}</td>
+                {% for termin in ["08:00 - 09:30", "09:30 - 11:00", "11:00 - 12:30", "PAUZA", "13:00 - 14:30", "14:30 - 16:00"] %}
+                    <td>
+                        {% if termin == "PAUZA" %}
+                            <strong>PAUZA</strong>
+                        {% else %}
+                            {% set raspored_termin = raspored.get(dan, {}).get(termin) %}
+                            {% if raspored_termin %}
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2"><strong>{{ raspored_termin }}</strong></span> <!-- ✅ Klijent i zaposleni -->
+                                    <form action="{{ url_for('obrisi_termin') }}" method="POST" style="display:inline;">
+                                        <input type="hidden" name="dan" value="{{ dan }}">
+                                        <input type="hidden" name="termin" value="{{ termin }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">X</button> <!-- ✅ Dugme za brisanje -->
+                                    </form>
+                                </div>
+                            {% else %}
+                                <form action="{{ url_for('izmena_rasporeda') }}" method="POST">
+                                    <input type="hidden" name="dan" value="{{ dan }}">
+                                    <input type="hidden" name="termin" value="{{ termin }}">
+                                    <select name="zaposleni_id" class="form-select form-select-sm" required>
+                                        <option value="" disabled selected>Izaberite zaposlenog</option>
+                                        {% for zaposleni in zaposleni_lista %}
+                                            <option value="{{ zaposleni.id }}">{{ zaposleni.ime }} {{ zaposleni.prezime }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="text" name="klijent" placeholder="Klijent" class="form-control form-control-sm mt-1" required>
+                                    <button type="submit" class="btn btn-sm btn-warning mt-1">Dodaj</button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}            
+
+        </tbody>
+    </table>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show flash-message" role="alert">
+                <span class="bubble">{{ message }}</span>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

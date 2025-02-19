@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>RASPORED RADNIKA</h2>
+
+    {% if session.get('role') == 'menadzer' %}
+        <div class="select-container">
+            {% if not odabrani_zaposleni_id %}
+                <p class="text-muted">Izaberite zaposlenog da biste videli njegov raspored.</p>
+            {% endif %}
+            <form method="GET" action="{{ url_for('radnik_raspored') }}">
+                <select name="zaposleni_id" id="zaposleni_id" class="custom-select" onchange="this.form.submit()">
+                    <option value=""> Izaberi zaposlenog </option>
+                    {% for zaposleni in zaposleni_lista %}
+                        <option value="{{ zaposleni.id }}" {% if zaposleni.id == odabrani_zaposleni_id %}selected{% endif %}>
+                            {{ zaposleni.ime }} {{ zaposleni.prezime }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if odabrani_zaposleni_id %}
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Dan</th>
+                    <th>08:00 - 09:30</th>
+                    <th>09:30 - 11:00</th>
+                    <th>11:00 - 12:30</th>
+                    <th>PAUZA</th>
+                    <th>13:00 - 14:30</th>
+                    <th>14:30 - 16:00</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set dani = ["Ponedeljak", "Utorak", "Sreda", "Četvrtak", "Petak"] %}
+                {% set termini = ["08:00", "09:30", "11:00", "PAUZA", "13:00", "14:30"] %}
+
+                {% for dan in dani %}
+                    <tr>
+                        <td>{{ dan }}</td>
+                        {% for termin in termini %}
+                            <td>
+                                {% if termin == "PAUZA" %}
+                                    <strong>PAUZA</strong>
+                                {% else %}
+                                    {% set klijent = raspored.get(dan, {}).get(termin, None) %}
+                                    {% if klijent %}
+                                        <strong>{{ klijent }}</strong>
+                                    {% else %}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">Nema podataka za odabranog radnika.</p>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show flash-message" role="alert">
+                    <span class="bubble">{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

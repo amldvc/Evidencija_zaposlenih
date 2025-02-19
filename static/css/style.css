@@ -1,0 +1,305 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+    margin: 0;
+    flex-direction: column;
+}
+ 
+.container {
+    text-align: center;
+}
+ 
+.logo {
+    width: 500px; /* Podesi veličinu po potrebi */
+    margin-bottom: 20px;
+}
+ 
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 10px;
+}
+
+/* Responsive prilagođavanje za manje ekrane */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Na telefonima slika ide iznad forme */
+        gap: 20px;
+    }
+ 
+    .logo {
+        width: 250px;
+    }
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+ 
+button {
+    padding: 10px;
+    background-color: #D4AF37; /* Zlatna boja */
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+ 
+button:hover {
+    background-color: #B8860B; /* Tamnija zlatna */
+}
+ 
+table {
+    width: 100%;
+    border-collapse: collapse; /* Spaja ivice ćelija */
+    margin: 20px 0;
+}
+ 
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ccc; /* Koristimo sličnu boju kao za ivice inputa */
+}
+ 
+th {
+    background-color: #D4AF37; /* Zlatna boja kao za dugme */
+    color: white;
+    font-weight: bold;
+}
+ 
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Svetlo siva za svaki drugi red */
+}
+ 
+tr:hover {
+    background-color: #f1f1f1; /* Pozadina kada pređeš mišem preko reda */
+}
+ 
+#menadzer
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+ 
+ul li {
+    margin: 10px 0;
+}
+ 
+ul li a {
+    text-decoration: none;
+    color: #D4AF37; /* Zlatna boja */
+    font-size: 18px;
+}
+ 
+ul li a:hover {
+    color: #B8860B; /* Tamnija zlatna */
+}
+/* NAVBAR STIL */
+.navbar {
+    background-color: #D4AF37; /* Zlatna boja */
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+    position: fixed; /* Fiksiran na vrhu */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Osigurava da je iznad ostalog sadržaja */
+}
+ 
+/* Kontejner za centriranje sadržaja */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+ 
+/* Logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+ 
+/* Navigacioni linkovi */
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+ 
+.nav-links li {
+    margin: 0 15px;
+}
+ 
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+ 
+.nav-links a:hover {
+    color: #B8860B; /* Tamnija zlatna */
+}
+ 
+/* Ostatak stranice da ne bude prekriven */
+.container {
+    margin-top: 80px; /* Pomeranje sadržaja da ne bude ispod navbar-a */
+    padding: 20px;
+}
+ 
+ 
+#porukaRadniku
+ 
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #D4AF37;
+    color: white;
+    text-align: center;
+    transition: opacity 1s ease-out;
+}
+ 
+.alert.fade-out {
+    opacity: 0;
+}
+ 
+.flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    background-color: #f5f5f5; /* Svetlo siva pozadina */
+    color: #B8860B; /* Tamnozlatni tekst */
+    border-radius: 20px;
+    padding: 15px 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    display: inline-block;
+    max-width: 300px;
+    border: 2px solid #D4AF37; /* Zlatni okvir */
+}
+ 
+.flash-message .btn-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+ 
+.flash-message .bubble {
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: white; /* Unutrašnji mehurić ostaje beo */
+    color: #B8860B; /* Tamnozlatni tekst */
+    display: inline-block;
+}
+ 
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+ 
+.flash-message {
+    transition: opacity 1s ease-out;
+}
+ 
+.flash-message.fade-out {
+    opacity: 0;
+}
+ 
+ 
+#login-poruka {
+    background-color: #d9534f; /* Crvenkasta boja za grešku */
+    color: white; /* Beli tekst */
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    max-width: 400px;
+    margin: 10px auto; /* Centriranje */
+    text-align: center;
+    border: 2px solid #a94442; /* Tamnija crvena ivica */
+}
+ 
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+ 
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+.logout-btn {
+    background-color: #D4AF37; /* Zlatna boja */
+    color: white; /* Bela ikonica */
+    padding: 10px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px; 
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #B8860B; /* Tamnija zlatna */
+}
+
+#za dropdown na ruti radnik_raspored
+.select-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #B8860B; /* Tamnija zlatna */
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+ 
+.select-container p {
+    font-size: 16px;
+    font-weight: normal;
+    color: black;
+    margin-bottom: 10px;
+}
+ 
+.custom-select {
+    background-color: #D4AF37; /* Svetlija zlatna */
+    color: white;
+    border: 2px solid #B8860B;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none; /* Uklanja default stil pretraživača */
+}
+ 
+/* Stilizuje opcije u dropdown meniju */
+.custom-select option {
+    background-color: white; /* Bela pozadina */
+    color: black; /* Crni tekst */
+    border: 1px solid #D4AF37; /* Zlatna ivica */
+}
+ 
+/* Stil kada je dropdown aktivan */
+.custom-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.8);
+}
